@@ -1,0 +1,22 @@
+﻿<Switch @bind-Value="Model.IsSale" />
+
+<ValidateForm Model="@Model">
+    <EditorForm TModel="Product" AutoGenerateAllItem="false">
+
+        <FieldItems>
+
+            <EditorItem @bind-Field="context.ProductName" /> 
+            <EditorItem @bind-Field="context.Price" />
+          
+           
+            <Block OnQueryCondition="(async (str) => context.IsSale)">
+                <EditorItem @bind-Field="context.PriceSale" />
+            </Block>
+
+        </FieldItems>
+    </EditorForm>
+</ValidateForm>
+
+@code {
+    [Parameter] public Product Model { get; set; }
+}

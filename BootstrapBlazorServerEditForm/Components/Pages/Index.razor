@@ -1,0 +1,17 @@
+﻿@page "/"
+@attribute [TabItemOption(Text = "Index", Closable = false)]
+
+<Table TItem="Product" Items="products" AutoGenerateColumns="true" EditMode="EditMode.Popup" ShowExtendButtons="true"
+>
+<EditTemplate>
+    <EditTemplateProduct Model="context"/>
+</EditTemplate>
+</Table>
+
+
+@code {
+    List<Product> products = new List<Product>()
+    {
+        new(),new(),new(),new(),new()
+    };
+}
