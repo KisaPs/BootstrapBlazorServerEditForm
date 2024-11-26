@@ -1,5 +1,7 @@
 ﻿<Switch @bind-Value="Model.IsSale" />
 
+<Button Text="StateHasChanged" OnClick="StateHasChanged"/>
+
 <ValidateForm Model="@Model">
     <EditorForm TModel="Product" AutoGenerateAllItem="false">
 
@@ -7,11 +9,21 @@
 
             <EditorItem @bind-Field="context.ProductName" /> 
             <EditorItem @bind-Field="context.Price" />
-          
-           
+            <EditorItem @bind-Field="context.SaleType" />
+
+            @*          ***Before***  https://github.com/dotnetcore/BootstrapBlazor/discussions/4738
             <Block OnQueryCondition="(async (str) => context.IsSale)">
                 <EditorItem @bind-Field="context.PriceSale" />
             </Block>
+            *@
+
+            @*         ***After*** https://github.com/dotnetcore/BootstrapBlazor/discussions/4738*@
+            <EditorItem @bind-Field="context.PriceSale" Ignore="@Model.IsSale" />
+
+            <EditorItem @bind-Field="context.TypeDescription1" Ignore="@(Model.SaleType != SaleType.Type1)" />
+            <EditorItem @bind-Field="context.TypeDescription2" Ignore="@(Model.SaleType != SaleType.Type2)" />
+            <EditorItem @bind-Field="context.TypeDescription3" Ignore="@(Model.SaleType != SaleType.Type3)" />
+
 
         </FieldItems>
     </EditorForm>
