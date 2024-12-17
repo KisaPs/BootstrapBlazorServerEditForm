@@ -40,6 +40,7 @@ namespace BootstrapBlazorServerEditForm.Components.Shared
             {
                 new() { Text = "返回组件库", Icon = "fa-solid fa-fw fa-home", Url = "https://www.blazor.zone/components" },
                 new() { Text = "Index", Icon = "fa-solid fa-fw fa-flag", Url = "/" , Match = NavLinkMatch.All},
+                new() { Text = "Conditions", Icon = "fa-solid fa-fw fa-flag", Url = "/conditions"},
             };
 
             return menus;

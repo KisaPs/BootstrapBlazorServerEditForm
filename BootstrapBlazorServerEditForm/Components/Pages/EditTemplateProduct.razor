@@ -9,7 +9,7 @@
 
             <EditorItem @bind-Field="context.ProductName" /> 
             <EditorItem @bind-Field="context.Price" />
-            <EditorItem @bind-Field="context.SaleType" />
+            <EditorItem @bind-Field="context.SaleType" oninput="@StateHasChanged" />
 
             @*          ***Before***  https://github.com/dotnetcore/BootstrapBlazor/discussions/4738
             <Block OnQueryCondition="(async (str) => context.IsSale)">

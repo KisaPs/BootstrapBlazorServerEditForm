@@ -1,0 +1,47 @@
+﻿@page "/conditions"
+<h3>Conditions</h3>
+<Table Items="ConditionsList" AutoGenerateColumns=true IsExcel >
+</Table>
+@code {
+    public IEnumerable<Condition> ConditionsList = [new(), new(), new(), new(), new()];
+
+    public class Condition : IValidatableObject
+    {
+        public static int Id = 1;
+        public string ConditionId { get; set; } = Id++.ToString();
+        [Required] public string Name { get; set; }
+        public TypeCondition DataTypeCondition { get; set; }
+        private object dataValue;
+        public string DataValue
+        {
+            get => dataValue?.ToString() ?? string.Empty;
+            set => dataValue = value;
+            // {
+            //     if (DataTypeCondition == TypeCondition.Numeric)
+            //     {
+            //         if (decimal.TryParse(value, out var decimalValue)) dataValue = value;
+            //     }
+            //     else dataValue = value;
+            // }
+        }
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (string.IsNullOrEmpty(Name))
+            {
+                yield return new ValidationResult("Name is required", [nameof(Name)]);
+            }
+            if (DataTypeCondition == TypeCondition.Numeric)
+            {
+                if (!decimal.TryParse(DataValue, out var _))
+                {
+
+                    yield return new ValidationResult("Must be a number", [nameof(DataValue)]);
+                }
+            }
+        }
+        public enum TypeCondition
+        {
+            Numeric, Text
+        }
+    }
+}
